@@ -3,13 +3,13 @@ import Hero from '../components/Hero';
 
 const Home = () => {
   return (
-    <div className='flex flex-col justify-between h-[100vh]'>
-      <div>
+    <main className='flex flex-col justify-between h-[100vh]'>
+      <div className='flex flex-col gap-10'>
         <Header />
         <Hero />
       </div>
       <p className='text-center'>©Ilham Rizqyakbar Portfolio</p>
-    </div>
+    </main>
   )
 }
 

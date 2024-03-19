@@ -1,0 +1,11 @@
+.timeline:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  opacity: 0.5;
+  background: #000;
+  width: 2px;
+  height: 126%;
+  top: 20%;
+  left: 5px;
+  transform: translateX(-50%);
+}

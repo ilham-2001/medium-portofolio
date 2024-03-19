@@ -1,12 +1,4 @@
-import { codeHero } from '../assets/assets';
-import { 
-  angular,
-  react,
-  tailwind,
-  mysql,
-  nodejs,
-  php
-} from '../assets/assets';
+import { codeHero } from '../assets/assets';  
 import Button from './Button';
 import { ContactModel } from '../model.constant';
 
@@ -16,6 +8,17 @@ import {
   PopoverContent,
   PopoverTrigger,
  } from '../@/components/ui/popover';
+
+ import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "../@/components/ui/drawer"
 
 // fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -45,67 +48,101 @@ const contacts: Array<ContactModel> = [
 ];
 
 const Hero = () => {
-  const icons = [
-    angular,
-    react,
-    tailwind,
-    mysql,
-    nodejs,
-    php
-  ];
-
   const redirectToContacts = (link: string) => {
     window.open(link, '_blank');
+  }
+
+  const directToCV = () => {
+    const cvUrl = 'https://drive.google.com/file/d/1QYcD0L92Ume7f_H43_zWkHHBb6IAfM3F/view?usp=sharing';
+    window.open(cvUrl, '_blank')
   }
 
   return (
     <section className='container mx-auto flex justify-between items-center'>
       <div className='flex flex-col gap-8'>
         <div className='flex flex-col gap-2'>
-          <h1 className='text-6xl font-semibold'>Hi, I'm Ilham Rizqyakbar</h1>  
-          <p className='font-medium text-[20px]'>Software Developer</p>
+          <div className='max-sm:text-center flex flex-col gap-2'>
+            <h1 className='max-sm:text-5xl md:text-5xl xl:text-6xl font-semibold'>Hi, I'm Ilham Rizqyakbar</h1>  
+            <p className='font-medium md:text-[18px] xl:text-[20px]'>Software Developer</p>
+          </div>
           <p 
-            className='w-[690px] text-xl leading-8 border-l-[3px] border-black px-4'
+            className='xl:w-[690px] xl:text-xl leading-8 border-l-[3px] border-black px-4'
             >
             An undergradute informatics student from Universitas Islam Indonesia, Who's trying to be good something &#128075;
           </p>
         </div>
-        <div className='flex gap-4'>
-          <Button text='Curriculum Vitae'/>
-          <Popover>
-            <PopoverTrigger 
-              className='flex gap-2 border border-[#050505] px-4 py-3 font-medium  rounded-xl hover:bg-black hover:text-white'
-              >
-              Contact
-              <FontAwesomeIcon icon={faCaretDown} className='text-[18px]'/>
-            </PopoverTrigger>
-            <PopoverContent>
-              <ul className='flex flex-col gap-2'>
-                  {contacts.map((it: ContactModel, index: number) => {
-                    return (
-                      <li 
-                        key={index} 
-                        className='flex flex-col cursor-pointer hover:opacity-70'
-                        onClick={() => redirectToContacts(it.url!)}
-                        >
-                        <div className='flex gap-2 items-center'>
-                          <FontAwesomeIcon icon={it.icon} className='text-[18px]'/>
-                          {it.label}
-                        </div>
-                      </li>
-                    )
-                  })}
-              </ul>
-            </PopoverContent>
-          </Popover>
+        <img className='max-sm:h-[320px] sm:hidden xl:w-[540px]' src={codeHero} alt="a guy is programming" />
+        <div className='flex gap-4 max-sm:justify-center'>
+          <Button text='Curriculum Vitae' callback={directToCV}/>
+          <div className='max-sm:block hidden'>
+            <Drawer>
+                <DrawerTrigger 
+                  className='flex gap-2 border border-[#050505] px-4 py-3 font-medium  rounded-xl hover:bg-black hover:text-white'
+                  >
+                    Contacts
+                </DrawerTrigger>
+                <DrawerContent className='bg-white'>
+                  <DrawerHeader>
+                    <DrawerTitle>Contacts</DrawerTitle>
+                    <DrawerDescription>List of contacts and social media I have.</DrawerDescription>
+                  </DrawerHeader>
+                  <div className='p-4 pb-0'>
+                    <ul className='flex flex-col gap-2'>
+                      {contacts.map((it: ContactModel, index: number) => {
+                        return (
+                          <li 
+                            key={index} 
+                            className='flex flex-col'
+                            onClick={() => redirectToContacts(it.url!)}
+                            >
+                            <div className='flex gap-2 items-center'>
+                              <FontAwesomeIcon icon={it.icon} className='text-[20px]'/>
+                              {it.label}
+                            </div>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                  <DrawerFooter>
+                    <DrawerClose>
+                      {/* <Button variant="outline">Cancel</Button> */}
+                    </DrawerClose>
+                  </DrawerFooter>
+                </DrawerContent>
+              </Drawer>
+          </div>
+          <div className='hidden sm:block'>
+            <Popover>
+              <PopoverTrigger
+                className='flex gap-2 border border-[#050505] px-4 py-3 font-medium  rounded-xl hover:bg-black hover:text-white'
+                >
+                Contact
+                <FontAwesomeIcon icon={faCaretDown} className='text-[18px]'/>
+              </PopoverTrigger>
+              <PopoverContent>
+                <ul className='flex flex-col gap-2'>
+                    {contacts.map((it: ContactModel, index: number) => {
+                      return (
+                        <li 
+                          key={index} 
+                          className='flex flex-col cursor-pointer hover:opacity-70'
+                          onClick={() => redirectToContacts(it.url!)}
+                          >
+                          <div className='flex gap-2 items-center'>
+                            <FontAwesomeIcon icon={it.icon} className='text-[18px]'/>
+                            {it.label}
+                          </div>
+                        </li>
+                      )
+                    })}
+                </ul>
+              </PopoverContent>
+            </Popover>
+          </div>
         </div>
-        {/* <div className='flex justify-between'>
-          { icons.map((it, index) => {
-            return <img className='w-[48px] h-[48px] cursor-pointer hover:scale-125' key={index} src={it} alt='icon'></img>
-          }) }
-        </div> */}
       </div>
-      <img className='w-[540px]' src={codeHero} alt="a guy is coding" />
+      <img className='max-sm:hidden lg:w-[420px] xl:w-[540px]' src={codeHero} alt="a guy is programming" />
     </section>
   )
 }

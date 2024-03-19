@@ -2,11 +2,11 @@ import Header from '../components/Header';
 
 const Projects = () => {
   return (
-    <div>
+    <main>
       <div>
         <Header />
       </div>
-    </div>
+    </main>
   )
 }
 
