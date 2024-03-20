@@ -10,3 +10,11 @@ export interface ContactModel {
   icon: IconDefinition
   url?: string
 }
+
+
+export interface ProjectModel {
+  name: string
+  description: string
+  technologyUsed: Array<string>
+  whereToLook: Array<ContactModel>
+}
