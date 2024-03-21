@@ -38,7 +38,7 @@ const Header = () => {
   return (
     <header className='container mx-auto border-b border-[#f5f5f5] py-8 flex justify-between items-center'>
       <div className=''>
-        <h3 className='text-[24px] font-semibold'>Ilham R</h3>
+        <h3 className='text-[24px] font-semibold' onClick={() => navigateToPages('/')}>Ilham R</h3>
       </div>
       <nav>
         <div className='md:hidden'>

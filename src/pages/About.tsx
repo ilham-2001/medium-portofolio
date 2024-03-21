@@ -1,3 +1,6 @@
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 import Header from '../components/Header';
 import Timeline from '../components/Timeline';
 
@@ -12,7 +15,7 @@ import { ContactModel } from '../model.constant';
 import { ProjectModel } from '../model.constant';
 
 import { Badge } from '../@/components/ui/badge';
-import { useNavigate } from 'react-router-dom';
+import { toast } from "sonner"
 
 const reachOutContacts: Array<ContactModel> = [
   {
@@ -109,11 +112,36 @@ const redirectToLink = (link: string) => {
 }
 
 const About = () => {  
+  const [enterState, setEnterState] = useState('');
+  const [easterEggCounter, seteasterEggCounter] = useState(0);
+
   const navigate = useNavigate();
 
   const toProjectSection = () => {
     navigate('/projects')
   }
+
+  const startHoverAnimation = () => {    
+    setEnterState('translate-x-3 duration-500')
+  }
+
+  const stopHoverAnimation = () => {    
+    setEnterState('translate-x-0 duration-500')
+  }
+
+  const popEasterEgg = () => {
+    seteasterEggCounter(easterEggCounter+1);
+  }
+
+  useEffect(() => {
+    if (easterEggCounter % 3 === 0 && easterEggCounter !== 0) {
+
+      toast("You found an easter egg", {
+        description: "Saturday, March 16, 2024 at 22:00 PM",
+      })      
+      seteasterEggCounter(0)
+    }
+  }, [easterEggCounter])
 
   return (
     <main>
@@ -121,7 +149,7 @@ const About = () => {
         <Header />
         <section className='container flex flex-col gap-6 lg:flex-row lg:h-[80vh] lg:overflow-hidden'>
           <div className='lg:flex-1'>
-            <h1 className='text-5xl font-semibold mb-4'>Ilham Rizqyakbar</h1>
+            <h1 className='text-5xl font-semibold mb-4' onClick={popEasterEgg}>Ilham Rizqyakbar</h1>
             <p>An enthusiastic software artisan, reveling in creation, predominantly crafts captivating web applications.</p>
             <ul className='flex gap-3 mt-4'>
               {reachOutContacts.map((it: any, index: number) => {
@@ -179,9 +207,11 @@ const About = () => {
                   <p 
                     className='flex gap-2 items-center cursor-pointer hover:opacity-70'
                     onClick={toProjectSection}
+                    onMouseEnter={startHoverAnimation}
+                    onMouseLeave={stopHoverAnimation}
                     >
                     <span>See other projects</span>
-                    <FontAwesomeIcon icon={faArrowRight}/>
+                    <FontAwesomeIcon icon={faArrowRight} className={`${enterState}`}/>
                   </p>
                 </li>
               </ul>
@@ -198,7 +228,7 @@ export default About;
 
 const Project = ({ name, technologyUsed, description, whereToLook }: any) => {
   if (technologyUsed.length > 3) {
-    const numOfOtherTechUsed = technologyUsed.length - 3;
+    const numOfOtherTechUsed = technologyUsed.length - 3;    
     technologyUsed.splice(3, numOfOtherTechUsed)
     technologyUsed.push(`+${numOfOtherTechUsed}`)
   }
