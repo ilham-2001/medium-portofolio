@@ -4,8 +4,7 @@
   opacity: 0.5;
   background: #000;
   width: 2px;
-  height: 126%;
-  top: 20%;
+  height: calc(100% + 20px);
   left: 5px;
   transform: translateX(-50%);
 }

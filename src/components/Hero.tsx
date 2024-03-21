@@ -59,8 +59,8 @@ const Hero = () => {
 
   return (
     <section className='container mx-auto flex justify-between items-center'>
-      <div className='flex flex-col gap-8'>
-        <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-4'>
           <div className='max-sm:text-center flex flex-col gap-2'>
             <h1 className='max-sm:text-5xl md:text-5xl xl:text-6xl font-semibold'>Hi, I'm Ilham Rizqyakbar</h1>  
             <p className='font-medium md:text-[18px] xl:text-[20px]'>Software Developer</p>
@@ -72,12 +72,12 @@ const Hero = () => {
           </p>
         </div>
         <img className='max-sm:h-[320px] sm:hidden xl:w-[540px]' src={codeHero} alt="a guy is programming" />
-        <div className='flex gap-4 max-sm:justify-center'>
+        <div className='flex  gap-4 max-sm:flex-col max-sm:justify-center'>
           <Button text='Curriculum Vitae' callback={directToCV}/>
           <div className='max-sm:block hidden'>
             <Drawer>
                 <DrawerTrigger 
-                  className='flex gap-2 border border-[#050505] px-4 py-3 font-medium  rounded-xl hover:bg-black hover:text-white'
+                  className='flex max-sm:w-[100%] max-sm:justify-center gap-2 border border-[#050505] px-4 py-3 font-medium  rounded-xl hover:bg-black hover:text-white'
                   >
                     Contacts
                 </DrawerTrigger>

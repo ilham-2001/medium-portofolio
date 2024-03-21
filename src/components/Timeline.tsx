@@ -29,7 +29,7 @@ const Timeline = ({ title, experiences, callback }: any) => {
             return (
               <div key={index} className="relative flex gap-[10px] timeline">
                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="12" viewBox="0 0 10 12" fill="none">
-                  <circle className='fill-black' cx="5" cy="6" r="5" />
+                  <circle className='fill-black' cx="5" cy="5" r="5"/>
                 </svg>
                 <div className="flex flex-col">
                   <p className="font-semibold">{it.name}</p>
