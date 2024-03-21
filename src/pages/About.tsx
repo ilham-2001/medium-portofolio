@@ -103,12 +103,13 @@ const projects: Array<ProjectModel> = [
   }
 ];
 
+
+const redirectToLink = (link: string) => {
+  window.open(link, '_blank');
+}
+
 const About = () => {  
   const navigate = useNavigate();
-
-  const redirectToLink = (link: string) => {
-    window.open(link, '_blank');
-  }
 
   const toProjectSection = () => {
     navigate('/projects')
@@ -172,34 +173,7 @@ const About = () => {
               <h2 className='text-2xl font-bold'>Projects</h2>
               <ul className='flex flex-col gap-2'>
                 {projects.map((it: any, index: number) => {
-                  if (it.technologyUsed.length > 3) {
-                    const numOfOtherTechUsed = it.technologyUsed.length - 3;
-                    it.technologyUsed.splice(3, numOfOtherTechUsed)
-                    it.technologyUsed.push(`+${numOfOtherTechUsed}`)
-                  }
-                  return (
-                    <li className='flex flex-col gap-2' key={index}>
-                      <h3 className='font-semibold'>{it.name}</h3>
-                      <p>{it.description}</p>
-                      <div className='flex gap-1'>
-                        {it.technologyUsed.map((it: string, index: number) => {
-                          return (
-                            <Badge key={index} className='border-black'>{it}</Badge>
-                          )
-                        })}
-                      </div>
-                      <div className='flex gap-1'>
-                        {it.whereToLook.map((it: ContactModel, index: number) => {                          
-                          return (
-                            <div key={index} className='flex gap-1 cursor-pointer hover:opacity-70' onClick={() => redirectToLink(it.url!)}>
-                              <FontAwesomeIcon className='text-[16px]' icon={it.icon}/>
-                              <span className='text-[14px]'>Repository</span>
-                            </div>
-                          )
-                        })}
-                      </div>
-                    </li>
-                  )
+                  return <Project key={index} name={it.name} technologyUsed={it.technologyUsed} description={it.description} whereToLook={it.whereToLook}/>
                 })}
                 <li>
                   <p 
@@ -220,3 +194,35 @@ const About = () => {
 }
 
 export default About;
+
+
+const Project = ({ name, technologyUsed, description, whereToLook }: any) => {
+  if (technologyUsed.length > 3) {
+    const numOfOtherTechUsed = technologyUsed.length - 3;
+    technologyUsed.splice(3, numOfOtherTechUsed)
+    technologyUsed.push(`+${numOfOtherTechUsed}`)
+  }
+  return (
+    <li className='flex flex-col gap-2'>
+      <h3 className='font-semibold'>{name}</h3>
+      <p>{description}</p>
+      <div className='flex gap-1'>
+        {technologyUsed.map((it: string, index: number) => {
+          return (
+            <Badge key={index} className='border-black'>{it}</Badge>
+          )
+        })}
+      </div>
+      <div className='flex gap-1'>
+        {whereToLook.map((it: ContactModel, index: number) => {                          
+          return (
+            <div key={index} className='flex gap-1 cursor-pointer hover:opacity-70' onClick={() => redirectToLink(it.url!)}>
+              <FontAwesomeIcon className='text-[16px]' icon={it.icon}/>
+              <span className='text-[14px]'>Repository</span>
+            </div>
+          )
+        })}
+      </div>
+    </li>
+  )
+};

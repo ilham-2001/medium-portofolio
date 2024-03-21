@@ -2,6 +2,16 @@ import { NavigationLinks as NavModel } from '../model.constant';
 
 import { useNavigate } from 'react-router-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "../@/components/ui/popover"
+
+
 const navItems: Array<NavModel> = [
   {
     label: "Home",
@@ -31,7 +41,29 @@ const Header = () => {
         <h3 className='text-[24px] font-semibold'>Ilham R</h3>
       </div>
       <nav>
-        <ul className='flex gap-8'>
+        <div className='md:hidden'>
+        <Popover>
+          <PopoverTrigger>
+            <FontAwesomeIcon className='text-[24px]' icon={faBars}/>
+          </PopoverTrigger>
+          <PopoverContent className='bg-white'>
+            <ul className='flex flex-col'>
+              {navItems.map((it, index) => {
+                return (
+                <li 
+                  key={index} 
+                  className='p-1 gap-2'
+                  onClick={() => navigateToPages(it.url!)}
+                  >
+                  {it.label}
+                </li>
+                )
+              })}
+            </ul>
+          </PopoverContent>
+        </Popover>
+        </div>
+        <ul className='hidden md:flex gap-8'>
             {navItems.map((it, index) => {
               return (
               <li 
