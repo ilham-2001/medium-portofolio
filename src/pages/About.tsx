@@ -116,7 +116,7 @@ const About = () => {
 
   return (
     <main>
-      <div className='flex flex-col gap-10'>
+      <div className='flex flex-col gap-8'>
         <Header />
         <section className='container flex flex-col gap-6 lg:flex-row lg:h-[80vh] lg:overflow-hidden'>
           <div className='lg:flex-1'>
