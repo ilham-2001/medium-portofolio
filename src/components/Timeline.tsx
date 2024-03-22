@@ -18,12 +18,6 @@ import {
 
 import { useState } from 'react';
 
-
-// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-//   'pdfjs-dist/build/pdf.worker.min.js',
-//   import.meta.url,
-// ).toString();
-
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 
@@ -50,7 +44,7 @@ const Timeline = ({ title, experiences}: any) => {
                   See credential 
                   <FontAwesomeIcon className='text-[12px]' icon={faArrowUpRightFromSquare}/>
                 </DialogTrigger>
-                <DialogContent className='flex justify-center bg-white w-[95%]'>
+                <DialogContent className='flex justify-center bg-white'>
                   <DialogHeader>
                     <DialogTitle className='text-[14px]'>{it.name}</DialogTitle>
                     <Document file={it.credential} onLoadSuccess={onDocumentLoadSuccess}>
