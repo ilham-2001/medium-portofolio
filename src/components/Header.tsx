@@ -14,10 +14,6 @@ import {
 
 const navItems: Array<NavModel> = [
   {
-    label: "Home",
-    url: '/'
-  },
-  {
     label: "Projects",
     url: '/projects'
   },

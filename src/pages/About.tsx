@@ -6,6 +6,7 @@ import Timeline from '../components/Timeline';
 
 import '../assets/css/About.css'
 
+// fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
@@ -14,8 +15,11 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { ContactModel } from '../model.constant';
 import { ProjectModel } from '../model.constant';
 
+// shadcn
+
 import { Badge } from '../@/components/ui/badge';
 import { toast } from "sonner"
+
 
 const reachOutContacts: Array<ContactModel> = [
   {
@@ -58,17 +62,17 @@ const competitionExperience: Array<any> = [
   {
     name: 'Pekan Ilmiah Mahasiswa - Karya Inovasi (PKM-KI)',
     date: '2022',
-    credential: 'https://drive.google.com/file/d/1OkYo0jP8jcbt1oM82CJ31emXEz_bOArh/view'
+    credential: './files/MUHAMMAD ILHAM RIZQYAKBAR_KI_2022_sertifikat.pdf'
   },
   {
     name: 'Kontes Robot Indonesia (KRI)',
     date: '2022',
-    credential: 'https://drive.google.com/file/d/1cnH7oeb2tpsfMQOZcC_-Br4DzNu5d_zN/view'
+    credential: './files/KRI2022.pdf'
   },
   {
     name: 'Kontes Robot Indonesia (KRI)',
     date: '2021',
-    credential: 'https://drive.google.com/file/d/1XZb9I6omHIlGkxh7-mFicEViassZq1Jb/view'
+    credential: './files/KRI2021.pdf'
   }
 ];
 
@@ -111,9 +115,11 @@ const redirectToLink = (link: string) => {
   window.open(link, '_blank');
 }
 
+
 const About = () => {  
-  const [enterState, setEnterState] = useState('');
-  const [easterEggCounter, seteasterEggCounter] = useState(0);
+  const [enterState, setEnterState] = useState<string>('');
+
+  const [easterEggCounter, seteasterEggCounter] = useState<number>(0);
 
   const navigate = useNavigate();
 
@@ -132,6 +138,7 @@ const About = () => {
   const popEasterEgg = () => {
     seteasterEggCounter(easterEggCounter+1);
   }
+
 
   useEffect(() => {
     if (easterEggCounter % 3 === 0 && easterEggCounter !== 0) {
@@ -190,7 +197,7 @@ const About = () => {
               <h2 className='text-2xl font-bold'>Experience</h2>
               <div className='flex flex-col gap-2'>
                 <Timeline title='Working Experience' experiences={workingExperiences}/>
-                <Timeline title='Competition Experience' experiences={competitionExperience} callback={redirectToLink}/>
+                <Timeline title='Competition Experience' experiences={competitionExperience}/>
               </div>
             </div>
             <div className='flex flex-col'>

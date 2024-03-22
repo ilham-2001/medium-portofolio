@@ -3,8 +3,37 @@ import '../assets/css/Timeline.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
+import { pdfjs, Document, Page } from 'react-pdf';
+import type { PDFDocumentProxy } from 'pdfjs-dist';
+import 'react-pdf/dist/Page/TextLayer.css';
+import 'react-pdf/dist/Page/AnnotationLayer.css';
 
-const Timeline = ({ title, experiences, callback }: any) => {
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../@/components/ui/dialog"
+
+import { useState } from 'react';
+
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url,
+).toString();
+
+
+const Timeline = ({ title, experiences}: any) => {
+  const [numPages, setNumPages] = useState<number>();
+
+  const onDocumentLoadSuccess = ({ numPages: nextNumPages }: PDFDocumentProxy) => {
+    setNumPages(nextNumPages);
+  }
+
+
   return (
     <div className='flex flex-col gap-[10px]'>
       <div className="flex gap-[10px] items-center">
@@ -15,13 +44,26 @@ const Timeline = ({ title, experiences, callback }: any) => {
         <div className="flex flex-col gap-5">
           {experiences.map((it: any, index: number) => {
             const credential = it.credential ? 
-            <p 
-              className='flex gap-1 items-center underline hover:opacity-70 cursor-pointer'
-              onClick={() => callback(it.credential)} 
-              >
-              <span>See credential </span>
-              <FontAwesomeIcon className='text-[12px]' icon={faArrowUpRightFromSquare}/>
-            </p>
+              <Dialog>
+                <DialogTrigger className='flex gap-1 items-center underline hover:opacity-70 cursor-pointer'>
+                  See credential 
+                  <FontAwesomeIcon className='text-[12px]' icon={faArrowUpRightFromSquare}/>
+                </DialogTrigger>
+                <DialogContent className='flex justify-center bg-white w-[95%]'>
+                  <DialogHeader>
+                    <DialogTitle className='text-[14px]'>{it.name}</DialogTitle>
+                    <Document file={it.credential} onLoadSuccess={onDocumentLoadSuccess}>
+                      {Array.from(new Array(numPages), (el, index) => (
+                        <Page
+                          key={`page_${index + 1}`}
+                          pageNumber={index + 1}
+                          width={350}
+                        />
+                      ))}
+                    </Document>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
             : '';
 
             const majorGPA = it.gpa && <p className='text-[14px]'>{it.gpa}</p>;
