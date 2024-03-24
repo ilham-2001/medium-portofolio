@@ -46,7 +46,7 @@ const Timeline = ({ title, experiences}: any) => {
                 </DialogTrigger>
                 <DialogContent className='flex justify-center bg-white'>
                   <DialogHeader>
-                    <DialogTitle className='text-[14px]'>{it.name}</DialogTitle>
+                    <DialogTitle className='text-[14px] text-center'>{it.name}</DialogTitle>
                     <Document file={it.credential} onLoadSuccess={onDocumentLoadSuccess}>
                       {Array.from(new Array(numPages), (el, index) => (
                         <Page
