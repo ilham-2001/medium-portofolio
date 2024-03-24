@@ -53,7 +53,7 @@ const Hero = () => {
   }
 
   const directToCV = () => {
-    const cvUrl = 'https://drive.google.com/file/d/1QYcD0L92Ume7f_H43_zWkHHBb6IAfM3F/view?usp=sharing';
+    const cvUrl = 'https://drive.google.com/file/d/1FaxeO2VcgimHwDux-6wMQ16ANlG9YQ4I/view?usp=sharing';
     window.open(cvUrl, '_blank')
   }
 
@@ -61,7 +61,7 @@ const Hero = () => {
     <section className='container mx-auto flex justify-between items-center'>
       <div className='flex flex-col gap-4'>
         <div className='flex flex-col gap-4'>
-          <div className='max-sm:text-center flex flex-col gap-2'>
+          <div className='flex flex-col gap-2'>
             <h1 className='max-sm:text-5xl md:text-5xl xl:text-6xl font-semibold'>Hi, I'm Ilham Rizqyakbar</h1>  
             <p className='font-medium md:text-[18px] xl:text-[20px]'>Software Developer</p>
           </div>
