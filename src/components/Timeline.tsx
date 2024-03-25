@@ -3,7 +3,7 @@ import '../assets/css/Timeline.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
-import { pdfjs, Document, Page } from 'react-pdf';
+import { Document, Page } from 'react-pdf';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
@@ -17,8 +17,6 @@ import {
 } from "../@/components/ui/dialog"
 
 import { useState } from 'react';
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 
 const Timeline = ({ title, experiences}: any) => {

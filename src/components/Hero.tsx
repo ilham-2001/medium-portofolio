@@ -1,6 +1,7 @@
 import { codeHero } from '../assets/assets';  
 import Button from './Button';
 import { ContactModel } from '../model.constant';
+import { redirectToLink } from '../global-variable';
 
 // shadcn
 import { 
@@ -48,10 +49,6 @@ const contacts: Array<ContactModel> = [
 ];
 
 const Hero = () => {
-  const redirectToContacts = (link: string) => {
-    window.open(link, '_blank');
-  }
-
   const directToCV = () => {
     const cvUrl = 'https://drive.google.com/file/d/1FaxeO2VcgimHwDux-6wMQ16ANlG9YQ4I/view?usp=sharing';
     window.open(cvUrl, '_blank')
@@ -93,7 +90,7 @@ const Hero = () => {
                           <li 
                             key={index} 
                             className='flex flex-col'
-                            onClick={() => redirectToContacts(it.url!)}
+                            onClick={() => redirectToLink(it.url!)}
                             >
                             <div className='flex gap-2 items-center'>
                               <FontAwesomeIcon icon={it.icon} className='text-[20px]'/>
@@ -127,7 +124,7 @@ const Hero = () => {
                         <li 
                           key={index} 
                           className='flex flex-col cursor-pointer hover:opacity-70'
-                          onClick={() => redirectToContacts(it.url!)}
+                          onClick={() => redirectToLink(it.url!)}
                           >
                           <div className='flex gap-2 items-center'>
                             <FontAwesomeIcon icon={it.icon} className='text-[18px]'/>

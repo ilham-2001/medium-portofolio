@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import Header from '../components/Header';
 import Timeline from '../components/Timeline';
+import { redirectToLink } from '../global-variable';
 
 import '../assets/css/About.css'
 
@@ -16,7 +17,6 @@ import { ContactModel } from '../model.constant';
 import { ProjectModel } from '../model.constant';
 
 // shadcn
-
 import { Badge } from '../@/components/ui/badge';
 import { toast } from "sonner"
 
@@ -109,11 +109,6 @@ const projects: Array<ProjectModel> = [
     whereToLook: [{ label: '', icon: faGithub, url: 'https://github.com/ilham-2001/unisi_pt'}],
   }
 ];
-
-
-const redirectToLink = (link: string) => {
-  window.open(link, '_blank');
-}
 
 
 const About = () => {  

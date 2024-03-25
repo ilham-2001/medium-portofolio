@@ -8,7 +8,7 @@ const Home = () => {
         <Header />
         <Hero />
       </div>
-      <p className='mt-4 text-[14px] text-center'>©Ilham Rizqyakbar Portfolio</p>
+      <p className='mt-8 text-[14px] text-center'>©Ilham Rizqyakbar Portfolio</p>
     </main>
   )
 }
