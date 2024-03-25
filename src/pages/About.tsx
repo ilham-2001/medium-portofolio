@@ -13,10 +13,10 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import { ContactModel } from '../model.constant';
-import { ProjectModel } from '../model.constant';
+
+import { projects } from '../data/global-variable';
 
 // shadcn
-
 import { Badge } from '../@/components/ui/badge';
 import { toast } from "sonner"
 
@@ -86,27 +86,6 @@ const educationBackground: Array<any> = [
     name: 'SMAN 2 Ngaglik',
     date: '2016 - 2019',
     gpa: 'Science Major'
-  }
-];
-
-const projects: Array<ProjectModel> = [
-  {
-    name: 'LabSyms',
-    description: 'Web based laboratorium monitoring system to check whether a person wearing a complete set of laboratorium safety apparel.',
-    technologyUsed: ['React', 'TailwindCSS', 'Python', 'Tensorflow', 'MQTT'],
-    whereToLook: [{ label: '', icon: faGithub, url: 'https://github.com/ilham-2001/labsyms'}],
-  },
-  {
-    name: 'Bizz-it - Logo Matcher',
-    description: 'Deep learning model used to find available franchise in bizz-it mobile app by taking picture of some logo and find similar logo in the app.',
-    technologyUsed: ['Python', 'Tensorflow', 'FastAPI', 'Docker'],
-    whereToLook: [{ label: '', icon: faGithub, url: 'https://github.com/bizz-it/bizz-it_machine-learning'}],
-  },
-  {
-    name: 'Unisi-PartTime',
-    description: 'Web based application used to find various job vacany around Universitas Islam Indonesia.',
-    technologyUsed: ['Javascript', 'NodeJS', 'SQL', 'PHP'],
-    whereToLook: [{ label: '', icon: faGithub, url: 'https://github.com/ilham-2001/unisi_pt'}],
   }
 ];
 

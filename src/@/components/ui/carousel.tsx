@@ -198,6 +198,11 @@ const CarouselPrevious = React.forwardRef<
 >(({ className, variant = "outline", size = "icon", ...props }, ref) => {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
 
+  const customPrev = () => {
+    console.log('ini prev');
+    scrollPrev();
+  }
+
   return (
     <Button
       ref={ref}
@@ -211,7 +216,7 @@ const CarouselPrevious = React.forwardRef<
         className
       )}
       disabled={!canScrollPrev}
-      onClick={scrollPrev}
+      onClick={customPrev}
       {...props}
     >
       <ArrowLeft className="h-4 w-4" />

@@ -17,4 +17,5 @@ export interface ProjectModel {
   description: string
   technologyUsed: Array<string>
   whereToLook: Array<ContactModel>
+  thumbnail?: any
 }
