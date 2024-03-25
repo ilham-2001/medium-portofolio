@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { codeHero } from '../assets/assets';  
 import Button from './Button';
 import { ContactModel } from '../model.constant';
@@ -20,6 +22,14 @@ import {
   DrawerTrigger,
 } from "../@/components/ui/drawer"
 
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../@/components/ui/dialog"
+
 // fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
@@ -28,6 +38,10 @@ import {
   faTwitter, 
   faInstagram 
 } from '@fortawesome/free-brands-svg-icons';
+
+import { Document, Page } from 'react-pdf';
+import type { PDFDocumentProxy } from 'pdfjs-dist';
+
 
 const contacts: Array<ContactModel> = [
   {
@@ -48,13 +62,14 @@ const contacts: Array<ContactModel> = [
 ];
 
 const Hero = () => {
+  const [numPages, setNumPages] = useState<number>();
+
   const redirectToContacts = (link: string) => {
     window.open(link, '_blank');
   }
 
-  const directToCV = () => {
-    const cvUrl = 'https://drive.google.com/file/d/1FaxeO2VcgimHwDux-6wMQ16ANlG9YQ4I/view?usp=sharing';
-    window.open(cvUrl, '_blank')
+  const onDocumentLoadSuccess = ({ numPages: nextNumPages }: PDFDocumentProxy) => {
+    setNumPages(nextNumPages);
   }
 
   return (
@@ -73,7 +88,25 @@ const Hero = () => {
         </div>
         <img className='max-sm:h-[320px] sm:hidden xl:w-[540px]' src={codeHero} alt="a guy is programming" />
         <div className='flex  gap-4 max-sm:flex-col max-sm:justify-center'>
-          <Button text='Curriculum Vitae' callback={directToCV}/>
+          <Dialog>
+            <DialogTrigger className='border border-[#050505] px-4 py-3 font-medium  rounded-xl hover:bg-black hover:text-white'>
+              Curriculum Vitae
+            </DialogTrigger>
+            <DialogContent className='flex justify-center bg-white'>
+              <DialogHeader>
+                <DialogTitle className='text-[14px]'></DialogTitle>
+                <Document file='./files/SWE-CV_public.pdf' onLoadSuccess={onDocumentLoadSuccess}>
+                  {Array.from(new Array(numPages), (el, index) => (
+                    <Page
+                      key={`page_${index + 1}`}
+                      pageNumber={index + 1}
+                      width={300}
+                    />
+                  ))}
+                </Document>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
           <div className='max-sm:block hidden'>
             <Drawer>
                 <DrawerTrigger 
