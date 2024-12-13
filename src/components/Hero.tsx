@@ -1,7 +1,12 @@
+// assets
 import { codeHero } from '../assets/assets';  
+
+// component
 import Button from './Button';
-import { ContactModel } from '../model.constant';
-import { redirectToLink } from '../global-variable';
+
+// data & handler
+import { ContactModel } from '../global-interface';
+import { redirectToLink } from '../utils/utils';
 
 // shadcn
 import { 
@@ -30,7 +35,7 @@ import {
   faInstagram 
 } from '@fortawesome/free-brands-svg-icons';
 
-const contacts: Array<ContactModel> = [
+const contacts: ContactModel[] = [
   {
     label: 'irizqy_',
     icon: faInstagram,
@@ -103,7 +108,6 @@ const Hero = () => {
                   </div>
                   <DrawerFooter>
                     <DrawerClose>
-                      {/* <Button variant="outline">Cancel</Button> */}
                     </DrawerClose>
                   </DrawerFooter>
                 </DrawerContent>

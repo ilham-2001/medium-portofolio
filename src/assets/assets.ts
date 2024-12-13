@@ -1,5 +1,8 @@
 //  illustration
 export { default as codeHero } from "./illustrations/code.jpg";
+export { default as guavAi } from "./illustrations/guavai.png";
+export { default as noImage } from "./illustrations/no-image.png";
+export { default as unisiPt } from "./illustrations/unisi-pt.png";
 
 // icons
 export { default as angular } from "./icons/angular.svg";

@@ -1,11 +1,17 @@
+// react/react-router
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-
-import { Toaster } from './@/components/ui/sonner';
-
 import { BrowserRouter } from 'react-router-dom';
 
+// component
+import App from './App';
+
+// stylesheet
+import './index.css';
+
+// shadcn
+import { Toaster } from './@/components/ui/sonner'
+
+// pdfjs
 import { pdfjs } from 'react-pdf';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;

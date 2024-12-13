@@ -1,10 +1,18 @@
+// react/react-router
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+// component
 import Header from '../components/Header';
 import Timeline from '../components/Timeline';
-import { redirectToLink } from '../global-variable';
 
+// data & handler
+import { redirectToLink } from '../utils/utils';
+import { ContactModel } from '../global-interface';
+import { ProjectModel } from '../global-interface';
+import { TimelineModel } from '../global-interface';
+
+// stylesheet
 import '../assets/css/About.css'
 
 // fontawesome
@@ -13,15 +21,12 @@ import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-import { ContactModel } from '../model.constant';
-import { ProjectModel } from '../model.constant';
-
 // shadcn
 import { Badge } from '../@/components/ui/badge';
 import { toast } from "sonner"
 
 
-const reachOutContacts: Array<ContactModel> = [
+const reachOutContacts: ContactModel[] = [
   {
     label: 'Linkedin',
     icon: faLinkedin,
@@ -39,7 +44,7 @@ const reachOutContacts: Array<ContactModel> = [
   },
 ];
 
-const workingExperiences: Array<any> = [
+const workingExperiences: TimelineModel[] = [
   {
     name: 'Bangkit Academy - Mentor',
     date: '2023 - present',
@@ -58,7 +63,7 @@ const workingExperiences: Array<any> = [
   }
 ];
 
-const competitionExperience: Array<any> = [
+const competitionExperience: TimelineModel[] = [
   {
     name: 'Pekan Ilmiah Mahasiswa - Karya Inovasi (PKM-KI)',
     date: '2022',
@@ -76,11 +81,11 @@ const competitionExperience: Array<any> = [
   }
 ];
 
-const educationBackground: Array<any> = [
+const educationBackground: TimelineModel[] = [
   {
     name: 'Universitas Islam Indonesia',
     date: '2019 - present',
-    gpa: 'Informatics, GPA: 3.76'
+    gpa: 'Informatics, GPA: 3.80'
   },
   {
     name: 'SMAN 2 Ngaglik',
@@ -89,7 +94,7 @@ const educationBackground: Array<any> = [
   }
 ];
 
-const projects: Array<ProjectModel> = [
+const projects: ProjectModel[] = [
   {
     name: 'LabSyms',
     description: 'Web based laboratorium monitoring system to check whether a person wearing a complete set of laboratorium safety apparel.',
@@ -119,15 +124,15 @@ const About = () => {
   const navigate = useNavigate();
 
   const toProjectSection = () => {
-    navigate('/projects')
+    navigate('/projects');
   }
 
   const startHoverAnimation = () => {    
-    setEnterState('translate-x-3 duration-500')
+    setEnterState('translate-x-3 duration-500');
   }
 
   const stopHoverAnimation = () => {    
-    setEnterState('translate-x-0 duration-500')
+    setEnterState('translate-x-0 duration-500');
   }
 
   const popEasterEgg = () => {
@@ -141,9 +146,9 @@ const About = () => {
       toast("You found an easter egg", {
         description: "Saturday, March 16, 2024 at 22:00 PM",
       })      
-      seteasterEggCounter(0)
+      seteasterEggCounter(0);
     }
-  }, [easterEggCounter])
+  }, [easterEggCounter]);
 
   return (
     <main>
@@ -154,9 +159,9 @@ const About = () => {
             <h1 className='text-5xl font-semibold mb-4' onClick={popEasterEgg}>Ilham Rizqyakbar</h1>
             <p>An enthusiastic software artisan, reveling in creation, predominantly crafts captivating web applications.</p>
             <ul className='flex gap-3 mt-4'>
-              {reachOutContacts.map((it: any, index: number) => {
+              {reachOutContacts.map((it: ContactModel, index: number) => {
                 return (
-                  <li key={index} className='text-[20px] cursor-pointer hover:opacity-70' onClick={() => { redirectToLink(it.url) }}>
+                  <li key={index} className='text-[20px] cursor-pointer hover:opacity-70' onClick={() => { redirectToLink(it.url!) }}>
                     <FontAwesomeIcon icon={it.icon}/>
                   </li>
                 )
@@ -202,7 +207,7 @@ const About = () => {
             <div className='flex flex-col'>
               <h2 className='text-2xl font-bold'>Projects</h2>
               <ul className='flex flex-col gap-2'>
-                {projects.map((it: any, index: number) => {
+                {projects.map((it: ProjectModel, index: number) => {
                   return <Project key={index} name={it.name} technologyUsed={it.technologyUsed} description={it.description} whereToLook={it.whereToLook}/>
                 })}
                 <li>
@@ -228,18 +233,20 @@ const About = () => {
 export default About;
 
 
-const Project = ({ name, technologyUsed, description, whereToLook }: any) => {
+const Project = ({ name, technologyUsed, description, whereToLook }: ProjectModel) => {
+  const techUsed = []
+
   if (technologyUsed.length > 3) {
     const numOfOtherTechUsed = technologyUsed.length - 3;    
-    technologyUsed.splice(3, numOfOtherTechUsed)
-    technologyUsed.push(`+${numOfOtherTechUsed}`)
+    techUsed.push(...technologyUsed.slice(0, 3));
+    techUsed.push(`+${numOfOtherTechUsed}`);
   }
   return (
     <li className='flex flex-col gap-2'>
       <h3 className='font-semibold'>{name}</h3>
       <p>{description}</p>
       <div className='flex gap-1'>
-        {technologyUsed.map((it: string, index: number) => {
+        {techUsed.map((it: string, index: number) => {
           return (
             <Badge key={index} className='border-black'>{it}</Badge>
           )

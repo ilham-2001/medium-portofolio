@@ -1,10 +1,14 @@
-import { NavigationLinks as NavModel } from '../model.constant';
-
+// react/react router
 import { useNavigate } from 'react-router-dom';
 
+// data & handler
+import { NavigationLinks as NavModel } from '../global-interface';
+
+//  fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
+// shadcn
 import {
   Popover,
   PopoverContent,
@@ -12,7 +16,7 @@ import {
 } from "../@/components/ui/popover"
 
 
-const navItems: Array<NavModel> = [
+const navItems: NavModel[] = [
   {
     label: "Projects",
     url: '/projects'
@@ -43,7 +47,7 @@ const Header = () => {
               </PopoverTrigger>
               <PopoverContent className='bg-white'>
                 <ul className='flex flex-col'>
-                  {navItems.map((it, index) => {
+                  {navItems.map((it: NavModel, index: number) => {
                     return (
                     <li 
                       key={index} 
@@ -59,7 +63,7 @@ const Header = () => {
             </Popover>
             </div>
             <ul className='hidden md:flex gap-8'>
-                {navItems.map((it, index) => {
+                {navItems.map((it: NavModel, index: number) => {
                   return (
                   <li 
                     key={index} 

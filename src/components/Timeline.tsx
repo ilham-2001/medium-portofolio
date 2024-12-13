@@ -1,13 +1,23 @@
+// react/react-router
+import { useState } from 'react';
+
+// stylesheet
 import '../assets/css/Timeline.css'
 
+// data & handler
+import { TimelineModel } from '../global-interface';
+
+// fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
+// pdfjs
 import { Document, Page } from 'react-pdf';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 
+// shadcn
 import {
   Dialog,
   DialogContent,
@@ -16,10 +26,9 @@ import {
   DialogTrigger,
 } from "../@/components/ui/dialog"
 
-import { useState } from 'react';
 
 
-const Timeline = ({ title, experiences}: any) => {
+const Timeline = ({ title, experiences}:  {title: string, experiences: TimelineModel[]}) => {
   const [numPages, setNumPages] = useState<number>();
 
   const onDocumentLoadSuccess = ({ numPages: nextNumPages }: PDFDocumentProxy) => {
@@ -35,7 +44,7 @@ const Timeline = ({ title, experiences}: any) => {
       </div>
       <div className="pl-2_5">
         <div className="flex flex-col gap-5">
-          {experiences.map((it: any, index: number) => {
+          {experiences.map((it: TimelineModel, index: number) => {
             const credential = it.credential ? 
               <Dialog>
                 <DialogTrigger className='flex gap-1 items-center underline hover:opacity-70 cursor-pointer'>
@@ -46,7 +55,7 @@ const Timeline = ({ title, experiences}: any) => {
                   <DialogHeader>
                     <DialogTitle className='text-[14px]'>{it.name}</DialogTitle>
                     <Document file={it.credential} onLoadSuccess={onDocumentLoadSuccess}>
-                      {Array.from(new Array(numPages), (el, index) => (
+                      {Array.from(new Array(numPages), (_, index: number) => (
                         <Page
                           key={`page_${index + 1}`}
                           pageNumber={index + 1}
@@ -63,9 +72,10 @@ const Timeline = ({ title, experiences}: any) => {
 
             return (
               <div key={index} className="relative flex gap-[10px] timeline">
-                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="12" viewBox="0 0 10 12" fill="none">
+                {/* <svg xmlns="http://www.w3.org/2000/svg" width="10" height="12" viewBox="0 0 10 12" fill="none">
                   <circle className='fill-black' cx="5" cy="5" r="5"/>
-                </svg>
+                </svg> */}
+                <div className="min-w-3 h-3 bg-black rounded-full"></div>
                 <div className="flex flex-col">
                   <p className="font-semibold">{it.name}</p>
                   {credential}
